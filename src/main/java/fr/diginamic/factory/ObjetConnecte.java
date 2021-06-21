@@ -1,6 +1,6 @@
 package fr.diginamic.factory;
 
-public class ObjetConnecte {
+public abstract class ObjetConnecte {
 
     public int limiteVolts;
 
@@ -20,5 +20,23 @@ public class ObjetConnecte {
             default:
                 return null;
         }
+    }
+
+    /**
+     * get field
+     *
+     * @return limiteVolts
+     */
+    public int getLimiteVolts() {
+        return this.limiteVolts;
+    }
+
+    /**
+     * set field
+     *
+     * @param limiteVolts
+     */
+    public void setLimiteVolts(int limiteVolts) {
+        this.limiteVolts = limiteVolts;
     }
 }
