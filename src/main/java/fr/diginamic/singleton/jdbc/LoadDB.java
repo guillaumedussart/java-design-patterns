@@ -6,8 +6,6 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoadDB {
-    private static LoadDB single;
-
     private static final String DB_URL;
     private static final String DB_USER;
     private static final String DB_PWD;
@@ -25,11 +23,25 @@ public class LoadDB {
         connection = DriverManager.getConnection(DB_URL, DB_USER, DB_PWD);
     }
 
-    public static LoadDB getSingle() throws SQLException {
+    private static class LoadDBHolder {
+        private static LoadDB single;
 
-        return single = new LoadDB();
-
+        static {
+            try {
+                single = new LoadDB();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        }
     }
+
+
+    public static LoadDB getSingle() {
+
+        return LoadDBHolder.single;
+    }
+
+
 
     public Connection getConnection() {
         return connection;
