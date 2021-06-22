@@ -48,4 +48,12 @@ public class Animal {
         this.zone = zone;
     }
 
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Animal{");
+        sb.append("name='").append(name).append('\'');
+        sb.append("type='").append(this.getClass()).append('\'');
+        sb.append('}');
+        return sb.toString();
+    }
 }

@@ -96,4 +96,13 @@ public class Zone {
     }
 
 
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Zone{");
+        sb.append("name='").append(name).append('\'');
+        sb.append(", capacity=").append(capacity);
+        sb.append(", animals=").append(animals.toString());
+        sb.append('}');
+        return sb.toString();
+    }
 }
