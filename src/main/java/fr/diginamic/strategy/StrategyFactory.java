@@ -1,23 +1,34 @@
 package fr.diginamic.strategy;
 
+
+import fr.diginamic.strategy.exceptions.NotExistStrategyException;
+
 public class StrategyFactory {
 
-    private EnumTri type;
-
-    public StrategyFactory(EnumTri type) {
-        this.type = type;
-    }
 
     public StrategyFactory() {
     }
+    /**
+     *  strategy factory holder
+     *
+     */
+    private static class StrategyFactoryHolder {
+        private static StrategyFactory single;
+
+        static {
+            single = new StrategyFactory();
+        }
+    }
 
     /**
-     * get field
+     * get single
      *
-     * @return type
+     * @return {@link StrategyFactory}
+     * @see StrategyFactory
      */
-    public EnumTri getType() {
-        return this.type;
+    public static StrategyFactory getSingle() {
+
+        return StrategyFactoryHolder.single;
     }
 
     /**
@@ -25,7 +36,7 @@ public class StrategyFactory {
      *
      * @param type
      */
-    public Strategy setType(EnumTri type) {
+    public Strategy getType(EnumTri type) throws NotExistStrategyException {
         switch (type) {
             case SELECT:
                 return new SelectStrategy();
@@ -34,7 +45,7 @@ public class StrategyFactory {
             case INSERTION:
                 return new InsertionStrategy();
             default:
-                return null;
+                throw  new NotExistStrategyException("La strategy choisie n'existe pas !");
         }
     }
 }
